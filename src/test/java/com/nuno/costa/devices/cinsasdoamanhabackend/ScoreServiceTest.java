@@ -1,6 +1,7 @@
 package com.nuno.costa.devices.cinsasdoamanhabackend;
 
 import com.nuno.costa.devices.cinsasdoamanhabackend.dto.ScoreRequest;
+import com.nuno.costa.devices.cinsasdoamanhabackend.dto.ScoreResponse;
 import com.nuno.costa.devices.cinsasdoamanhabackend.model.Score;
 import com.nuno.costa.devices.cinsasdoamanhabackend.repository.ScoreRepository;
 import com.nuno.costa.devices.cinsasdoamanhabackend.service.ScoreService;
@@ -10,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,11 +68,15 @@ public class ScoreServiceTest {
 		when(scoreRepository.findTop10ByOrderByScoreValueDesc()).thenReturn(List.of(score1));
 
 		// Act
-		List<Score> scores = scoreService.getTopScores();
+		Collection<ScoreResponse> scores = scoreService.getTopScores();
 
 		// Assert
 		assertThat(scores).hasSize(1);
-		assertThat(scores.get(0).getScoreValue()).isEqualTo(5000);
+		assertThat(scores)
+			.first()
+			.extracting(ScoreResponse::getScoreValue)
+			.isEqualTo(5000);
+
 		verify(scoreRepository, times(1)).findTop10ByOrderByScoreValueDesc();
 	}
 }

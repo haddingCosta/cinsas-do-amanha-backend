@@ -1,7 +1,9 @@
 package com.nuno.costa.devices.cinsasdoamanhabackend.mapper;
 
 import com.nuno.costa.devices.cinsasdoamanhabackend.dto.ScoreRequest;
+import com.nuno.costa.devices.cinsasdoamanhabackend.dto.ScoreResponse;
 import com.nuno.costa.devices.cinsasdoamanhabackend.model.Score;
+import jakarta.validation.constraints.NotNull;
 
 public class ScoreMapper {
 
@@ -21,5 +23,15 @@ public class ScoreMapper {
 		score.setScoreValue(request.getScoreValue());
 
 		return score;
+	}
+
+	public static ScoreResponse toResponse(@NotNull Score score) {
+		ScoreResponse response = new ScoreResponse();
+
+		response.setEmail(score.getEmail());
+		response.setPlayerName(score.getPlayerName());
+		response.setScoreValue(score.getScoreValue());
+
+		return response;
 	}
 }

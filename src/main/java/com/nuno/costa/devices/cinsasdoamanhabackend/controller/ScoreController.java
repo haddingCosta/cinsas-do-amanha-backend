@@ -1,6 +1,7 @@
 package com.nuno.costa.devices.cinsasdoamanhabackend.controller;
 
 import com.nuno.costa.devices.cinsasdoamanhabackend.dto.ScoreRequest;
+import com.nuno.costa.devices.cinsasdoamanhabackend.dto.ScoreResponse;
 import com.nuno.costa.devices.cinsasdoamanhabackend.model.Score;
 import com.nuno.costa.devices.cinsasdoamanhabackend.service.ScoreService;
 import jakarta.validation.Valid;
@@ -37,7 +38,7 @@ public class ScoreController {
 	}
 
 	@GetMapping("/scores")
-	public Collection<Score> getTopScores() {
+	public Collection<ScoreResponse> getTopScores() {
 		return scoreService.getTopScores();
 	}
 
