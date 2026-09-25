@@ -27,14 +27,13 @@ public class ScoreController {
 	private final ScoreService scoreService;
 
 	@PostMapping("/saveScore")
-	public ResponseEntity<Score> saveScore(
+	public ResponseEntity<ScoreResponse> saveScore(
 		@Valid @RequestBody ScoreRequest request, // <-- Adicionar @Valid aqui
 		@AuthenticationPrincipal Jwt jwt) {
 
 		String userId = jwt.getSubject();
-		Score savedScore = 	scoreService.saveScore(request, userId);
 
-		return ResponseEntity.ok(savedScore);
+		return ResponseEntity.ok(scoreService.saveScore(request, userId));
 	}
 
 	@GetMapping("/scores")

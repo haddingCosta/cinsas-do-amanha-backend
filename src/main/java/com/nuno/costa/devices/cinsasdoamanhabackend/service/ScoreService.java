@@ -17,9 +17,9 @@ import java.util.List;
 public class ScoreService {
 	private final ScoreRepository scoreRepository;
 
-	public Score saveScore(ScoreRequest request, String userId) {
+	public ScoreResponse saveScore(ScoreRequest request, String userId) {
 		Score score = ScoreMapper.toEntity(request, userId);
-		return scoreRepository.save(score);
+		return ScoreMapper.toResponse(scoreRepository.save(score));
 	}
 
 	public Collection<ScoreResponse> getTopScores() {
